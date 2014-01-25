@@ -65,6 +65,15 @@ module TicTacToe
 
     describe "#cpu_turn" do
 
+      it "makes a move" do
+
+        @game.start
+        @game.cpu_turn
+
+        expect(@game.board).to_not eq empty_board
+
+      end
+
       it "describes the CPU's move" do
 
         expect(@output).to receive(:puts).with(/^CPU moves to/)
