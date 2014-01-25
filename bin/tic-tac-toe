@@ -13,7 +13,6 @@ game.player_turn
 
 player_input = gets
 move = player_input.chomp!.split(',')
-puts move.inspect
 
 game.make_move('O', move[0].to_i, move[1].to_i)
 game.print_board
