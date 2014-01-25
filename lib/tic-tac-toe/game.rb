@@ -49,8 +49,9 @@ module TicTacToe
     end
 
     def cpu_turn
-      make_move("X", 0, 0)
-      @output.puts "CPU moves to [0, 0]"
+      x, y = rand(3), rand(3)
+      make_move("X", x, y)
+      @output.puts "CPU moves to [#{x}, #{y}]"
     end
 
     def player_turn
