@@ -28,41 +28,6 @@ module TicTacToe
 
     end
 
-    describe "#print_board" do
-
-      it "prints the empty board" do
-
-        expect(@output).to receive(:puts).with("   |   |   ")
-        expect(@output).to receive(:puts).with("-----------")
-        expect(@output).to receive(:puts).with("   |   |   ")
-        expect(@output).to receive(:puts).with("-----------")
-        expect(@output).to receive(:puts).with("   |   |   ")
-
-        @game.start
-        @game.print_board
-
-      end
-
-      it "prints the winning board" do
-
-        expect(@output).to receive(:puts).with(" X | O | O ")
-        expect(@output).to receive(:puts).with("-----------")
-        expect(@output).to receive(:puts).with("   | X |   ")
-        expect(@output).to receive(:puts).with("-----------")
-        expect(@output).to receive(:puts).with("   |   | X ")
-
-        @game.start
-        @game.make_move('X', 0, 0)
-        @game.make_move('O', 0, 1)
-        @game.make_move('O', 0, 2)
-        @game.make_move('X', 1, 1)
-        @game.make_move('X', 2, 2)
-        @game.print_board
-
-      end
-
-    end
-
     describe "#cpu_turn" do
 
       it "makes a move" do
