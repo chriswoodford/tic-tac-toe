@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+require 'tic-tac-toe'
+
+game = TicTacToe::Game.new(STDOUT)
+game.start
+game.print_board
+
+game.cpu_turn
+game.print_board
+
+game.player_turn
+
+player_input = gets
+move = player_input.chomp!.split(',')
+puts move.inspect
+
+game.make_move('O', move[0].to_i, move[1].to_i)
+game.print_board
