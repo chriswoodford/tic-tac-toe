@@ -79,6 +79,38 @@ module TicTacToe
 
     end
 
+    describe "#over?" do
+
+      subject { @game }
+
+      context "the board is not full" do
+
+        context "has a winner" do
+          it { should be_over }
+        end
+
+        context "does not have a winner" do
+          it { should_not be_over }
+        end
+
+      end
+
+      context "board is full" do
+        it { should be_over }
+      end
+
+    end
+
+    describe "#winner" do
+
+      context "there is a winner" do
+      end
+
+      context "there is a tie" do
+      end
+
+    end
+
   end
 
 end
