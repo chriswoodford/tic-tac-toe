@@ -8,9 +8,9 @@ module TicTacToe
       @board = Board.new
     end
 
-    describe "#full?" do
+    subject { @board }
 
-      subject { @board }
+    describe "#full?" do
 
       context "board is full" do
 
@@ -54,6 +54,71 @@ module TicTacToe
     end
 
     describe "#has_winner?" do
+
+      context "three of the same character in a line" do
+
+        context "horizontal line" do
+
+          before(:each) do
+            @board.accept_move('X', 0, 0)
+            @board.accept_move('O', 1, 1)
+            @board.accept_move('X', 0, 1)
+            @board.accept_move('O', 2, 2)
+            @board.accept_move('X', 0, 2)
+          end
+
+          it { should have_winner }
+
+        end
+
+        context "vertical line" do
+
+          before(:each) do
+            @board.accept_move('X', 0, 0)
+            @board.accept_move('O', 1, 1)
+            @board.accept_move('X', 1, 0)
+            @board.accept_move('O', 2, 2)
+            @board.accept_move('X', 2, 0)
+          end
+
+          it { should have_winner }
+
+        end
+
+        context "diagonal line" do
+
+          before(:each) do
+            @board.accept_move('X', 1, 1)
+            @board.accept_move('O', 0, 0)
+            @board.accept_move('X', 2, 0)
+            @board.accept_move('O', 2, 2)
+            @board.accept_move('X', 0, 2)
+          end
+
+          it { should have_winner }
+
+        end
+
+      end
+
+      context "no line of three characters" do
+
+        before(:each) do
+          @board.accept_move('O', 0, 0)
+          @board.accept_move('X', 0, 1)
+          @board.accept_move('O', 0, 2)
+          @board.accept_move('X', 1, 0)
+          @board.accept_move('O', 1, 1)
+          @board.accept_move('X', 1, 2)
+          @board.accept_move('X', 2, 0)
+          @board.accept_move('O', 2, 1)
+          @board.accept_move('X', 2, 2)
+        end
+
+        it { should_not have_winner }
+
+      end
+
     end
 
     describe "#print" do

@@ -19,6 +19,14 @@ module TicTacToe
       true if empty_spaces == 0
     end
 
+    def has_winner?
+
+      # horizontal line
+      horizontal_lines = @board.map { |row| row.join.strip }
+      true if horizontal_lines.include?("XXX") || horizontal_lines.include?("OOO")
+
+    end
+
     def print(output)
 
       @board.each_with_index do |row, index|
