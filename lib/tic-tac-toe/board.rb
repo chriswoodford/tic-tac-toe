@@ -64,9 +64,13 @@ module TicTacToe
 
     def winner
       all_lines = horizontal_lines + vertical_lines + diagonal_lines
-      return "X" if x_is_winner?(all_lines)
-      return "O" if o_is_winner?(all_lines)
-      return ["X", "O"] if full?
+      if x_is_winner?(all_lines)
+        "X"
+      elsif o_is_winner?(all_lines)
+        "O"
+      elsif full?
+        ["X", "O"]
+      end
     end
 
     protected

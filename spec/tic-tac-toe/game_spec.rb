@@ -118,6 +118,12 @@ module TicTacToe
         @game.start(empty_board)
       end
 
+      context "there is no winner yet" do
+        it "winner is nil" do
+          expect(@game.winner).to be_nil
+        end
+      end
+
       context "there is a winner" do
 
         it "is a single character" do
@@ -132,16 +138,10 @@ module TicTacToe
 
       end
 
-      context "there is no winner yet" do
-        subject { @game.winner }
-        it { should be_nil }
-      end
-
       context "there is a tie" do
 
         it "is an array with two elements" do
           fill_board_with_no_winner(@game.board)
-          expect(@game.winner).to be_an(Array)
           expect(@game.winner).to have(2).items
         end
 
