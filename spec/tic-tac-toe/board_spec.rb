@@ -15,9 +15,20 @@ module TicTacToe
       context "a move already exists" do
 
         it "does not update the board" do
+
           @board.accept_move('X', 0, 0)
-          @board.accept_move('O', 0, 0)
+
+          catch (:invalid_move) do
+            @board.accept_move('O', 0, 0)
+          end
+
           expect(@board.at(0, 0)).to eq "X"
+
+        end
+
+        it "throws an invalid_move error" do
+          @board.accept_move('X', 0, 0)
+          expect { @board.accept_move('O', 0, 0) }.to throw_symbol(:invalid_move)
         end
 
       end

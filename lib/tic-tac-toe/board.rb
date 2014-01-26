@@ -26,6 +26,8 @@ module TicTacToe
 
       if at(x, y) == " "
         @board[x][y] = char
+      else
+        throw :invalid_move
       end
 
     end
