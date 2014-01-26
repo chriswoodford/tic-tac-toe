@@ -17,7 +17,7 @@ module TicTacToe
     end
 
     def print_board
-      @board.print(@ouput)
+      @board.print(@output)
     end
 
     def cpu_turn
