@@ -103,15 +103,7 @@ module TicTacToe
       context "board is full" do
 
         before(:each) do
-          @game.make_move('O', 0, 0)
-          @game.make_move('X', 0, 1)
-          @game.make_move('O', 0, 2)
-          @game.make_move('X', 1, 0)
-          @game.make_move('O', 1, 1)
-          @game.make_move('X', 1, 2)
-          @game.make_move('X', 2, 0)
-          @game.make_move('O', 2, 1)
-          @game.make_move('X', 2, 2)
+          fill_board_with_no_winner(@game.board)
         end
 
         it { should be_over }
@@ -122,10 +114,18 @@ module TicTacToe
 
     describe "#winner" do
 
+      subject { @game.winner }
+
       context "there is a winner" do
+        it { should eq "X" }
+      end
+
+      context "there is no winner yet" do
+        it { should eq nil }
       end
 
       context "there is a tie" do
+        it { should eq ['X', 'O'] }
       end
 
     end
