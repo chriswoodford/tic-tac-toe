@@ -22,8 +22,18 @@ module TicTacToe
     def has_winner?
 
       # horizontal line
-      horizontal_lines = @board.map { |row| row.join.strip }
-      true if horizontal_lines.include?("XXX") || horizontal_lines.include?("OOO")
+      return true if contains_winner? reduce_board(@board)
+
+      # vertical line
+      board_rotated_clockwise = @board.transpose.map(&:reverse)
+      return true if contains_winner? reduce_board(board_rotated_clockwise)
+
+      # diagonal line
+      diagonal_lines = [
+        @board[0][0].to_s + @board[1][1].to_s + @board[2][2].to_s,
+        @board[0][2].to_s + @board[1][1].to_s + @board[2][0].to_s
+      ]
+      true if contains_winner? diagonal_lines
 
     end
 
@@ -52,6 +62,16 @@ module TicTacToe
       end
 
     end
+
+    protected
+
+      def contains_winner?(lines)
+        true if lines.include?("XXX") || lines.include?("OOO")
+      end
+
+      def reduce_board(board)
+        board.map { |row| row.join.strip }
+      end
 
   end
 
