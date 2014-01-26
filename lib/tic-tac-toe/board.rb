@@ -10,6 +10,10 @@ module TicTacToe
       ]
     end
 
+    def to_a
+      @board
+    end
+
     def at(x, y)
       @board[x][y]
     end
@@ -65,32 +69,6 @@ module TicTacToe
       return ["X", "O"] if full?
     end
 
-    def print(output)
-
-      @board.each_with_index do |row, index|
-
-        built_row = ""
-
-        row.each_with_index do |col, index|
-
-          built_row += " #{col} "
-
-          if index < 2
-            built_row += "|"
-          end
-
-        end
-
-        output.puts built_row
-
-        if index < 2
-          output.puts "-----------"
-        end
-
-      end
-
-    end
-
     protected
 
       def horizontal_lines
@@ -104,8 +82,8 @@ module TicTacToe
 
       def diagonal_lines
         [
-          @board[0][0].to_s + @board[1][1].to_s + @board[2][2].to_s,
-          @board[0][2].to_s + @board[1][1].to_s + @board[2][0].to_s
+          at(0, 0).to_s + at(1, 1).to_s + at(2, 2).to_s,
+          at(0, 2).to_s + at(1, 1).to_s + at(2, 0).to_s
         ]
       end
 
