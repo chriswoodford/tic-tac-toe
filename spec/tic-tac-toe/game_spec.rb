@@ -75,11 +75,22 @@ module TicTacToe
 
     describe "#over?" do
 
+      before(:each) do
+        @game.start(empty_board)
+      end
+
       subject { @game }
 
       context "the board is not full" do
 
         context "has a winner" do
+
+          before(:each) do
+            @game.make_move('X', 0, 0)
+            @game.make_move('X', 1, 1)
+            @game.make_move('X', 2, 2)
+          end
+
           it { should be_over }
         end
 
@@ -90,7 +101,21 @@ module TicTacToe
       end
 
       context "board is full" do
+
+        before(:each) do
+          @game.make_move('O', 0, 0)
+          @game.make_move('X', 0, 1)
+          @game.make_move('O', 0, 2)
+          @game.make_move('X', 1, 0)
+          @game.make_move('O', 1, 1)
+          @game.make_move('X', 1, 2)
+          @game.make_move('X', 2, 0)
+          @game.make_move('O', 2, 1)
+          @game.make_move('X', 2, 2)
+        end
+
         it { should be_over }
+
       end
 
     end

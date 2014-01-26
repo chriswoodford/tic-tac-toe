@@ -31,13 +31,7 @@ module TicTacToe
     end
 
     def over?
-
-      if @board.full? || @board.has_winner?
-        true
-      else
-        false
-      end
-
+      true if @board.full? || @board.has_winner?
     end
 
   end
