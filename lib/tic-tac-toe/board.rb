@@ -127,4 +127,3 @@ module TicTacToe
   end
 
 end
-

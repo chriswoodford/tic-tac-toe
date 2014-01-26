@@ -66,12 +66,22 @@ module TicTacToe
           break
         end
 
-        player_turn
+        while true
 
-        player_input = gets
-        move = player_input.chomp!.split(',')
+          player_turn
 
-        make_move('O', move[0].to_i, move[1].to_i)
+          player_input = gets
+          move = player_input.chomp!.split(',')
+
+          begin
+            make_move('O', move[0].to_i, move[1].to_i)
+            break
+          rescue InvalidMoveError
+            puts "Please choose again"
+          end
+
+        end
+
         print_board
 
       end
