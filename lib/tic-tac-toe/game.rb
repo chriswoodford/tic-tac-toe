@@ -21,9 +21,19 @@ module TicTacToe
     end
 
     def cpu_turn
-      x, y = rand(3), rand(3)
-      make_move("X", x, y)
+
+      while true
+        begin
+          x, y = rand(3), rand(3)
+          make_move("X", x, y)
+          break
+        rescue InvalidMoveError
+          # let the CPU try
+        end
+      end
+
       @output.puts "CPU moves to [#{x}, #{y}]"
+
     end
 
     def player_turn

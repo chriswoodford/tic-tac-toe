@@ -27,7 +27,7 @@ module TicTacToe
       if at(x, y) == " "
         @board[x][y] = char
       else
-        throw :invalid_move
+        raise InvalidMoveError.new
       end
 
     end
@@ -123,4 +123,8 @@ module TicTacToe
 
   end
 
+  class InvalidMoveError < StandardError
+  end
+
 end
+

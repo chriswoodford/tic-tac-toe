@@ -18,17 +18,18 @@ module TicTacToe
 
           @board.accept_move('X', 0, 0)
 
-          catch (:invalid_move) do
+          begin
             @board.accept_move('O', 0, 0)
+          rescue InvalidMoveError
           end
 
           expect(@board.at(0, 0)).to eq "X"
 
         end
 
-        it "throws an invalid_move error" do
+        it "causes an invalid move error" do
           @board.accept_move('X', 0, 0)
-          expect { @board.accept_move('O', 0, 0) }.to throw_symbol(:invalid_move)
+          expect { @board.accept_move('O', 0, 0) }.to raise_error(InvalidMoveError)
         end
 
       end
