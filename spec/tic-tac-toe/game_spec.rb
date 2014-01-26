@@ -61,7 +61,7 @@ module TicTacToe
 
       it "updates the game board" do
 
-        board = empty_board.dup
+        board = Board.new
         board.accept_move("O", 1, 1)
 
         @game.start(empty_board)
@@ -114,18 +114,37 @@ module TicTacToe
 
     describe "#winner" do
 
-      subject { @game.winner }
+      before(:each) do
+        @game.start(empty_board)
+      end
 
       context "there is a winner" do
-        it { should eq "X" }
+
+        it "is a single character" do
+
+          @game.make_move('X', 0, 0)
+          @game.make_move('X', 1, 1)
+          @game.make_move('X', 2, 2)
+
+          expect(@game.winner).to match(/^\w$/)
+
+        end
+
       end
 
       context "there is no winner yet" do
-        it { should eq nil }
+        subject { @game.winner }
+        it { should be_nil }
       end
 
       context "there is a tie" do
-        it { should eq ['X', 'O'] }
+
+        it "is an array with two elements" do
+          fill_board_with_no_winner(@game.board)
+          expect(@game.winner).to be_an(Array)
+          expect(@game.winner).to have(2).items
+        end
+
       end
 
     end
