@@ -14,6 +14,10 @@ module TicTacToe
       @board[x][y]
     end
 
+    def remove(x, y)
+      @board[x][y] = " "
+    end
+
     def flatten
       @board.flatten
     end

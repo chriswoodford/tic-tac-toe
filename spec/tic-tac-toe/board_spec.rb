@@ -21,9 +21,8 @@ module TicTacToe
           begin
             @board.accept_move('O', 0, 0)
           rescue InvalidMoveError
+            expect(@board.at(0, 0)).to eq "X"
           end
-
-          expect(@board.at(0, 0)).to eq "X"
 
         end
 
@@ -41,15 +40,7 @@ module TicTacToe
       context "board is full" do
 
         before(:each) do
-          @board.accept_move('X', 0, 0)
-          @board.accept_move('X', 0, 1)
-          @board.accept_move('X', 0, 2)
-          @board.accept_move('X', 1, 0)
-          @board.accept_move('X', 1, 1)
-          @board.accept_move('X', 1, 2)
-          @board.accept_move('X', 2, 0)
-          @board.accept_move('X', 2, 1)
-          @board.accept_move('X', 2, 2)
+          fill_board_with_all_x(@board)
         end
 
         it { should be_full }
@@ -63,14 +54,8 @@ module TicTacToe
       context "board has some empty spaces" do
 
         before(:each) do
-          @board.accept_move('X', 0, 0)
-          @board.accept_move('X', 0, 1)
-          @board.accept_move('X', 0, 2)
-          @board.accept_move('X', 1, 0)
-          @board.accept_move('X', 1, 1)
-          @board.accept_move('X', 1, 2)
-          @board.accept_move('X', 2, 0)
-          @board.accept_move('X', 2, 1)
+          fill_board_with_all_x(@board)
+          @board.remove(2, 2)
         end
 
         it { should_not be_full }
@@ -114,15 +99,7 @@ module TicTacToe
       context "it is a tie" do
 
         before(:each) do
-          @board.accept_move('O', 0, 0)
-          @board.accept_move('X', 0, 1)
-          @board.accept_move('O', 0, 2)
-          @board.accept_move('X', 1, 0)
-          @board.accept_move('O', 1, 1)
-          @board.accept_move('X', 1, 2)
-          @board.accept_move('X', 2, 0)
-          @board.accept_move('O', 2, 1)
-          @board.accept_move('X', 2, 2)
+          fill_board_with_no_winner(@board)
         end
 
         it { should eq ["X", "O"] }
@@ -182,15 +159,7 @@ module TicTacToe
       context "no line of three characters" do
 
         before(:each) do
-          @board.accept_move('O', 0, 0)
-          @board.accept_move('X', 0, 1)
-          @board.accept_move('O', 0, 2)
-          @board.accept_move('X', 1, 0)
-          @board.accept_move('O', 1, 1)
-          @board.accept_move('X', 1, 2)
-          @board.accept_move('X', 2, 0)
-          @board.accept_move('O', 2, 1)
-          @board.accept_move('X', 2, 2)
+          fill_board_with_no_winner(@board)
         end
 
         it { should_not have_winner }
