@@ -9,6 +9,48 @@ module TicTacToe
     end
 
     describe "#full?" do
+
+      subject { @board }
+
+      context "board is full" do
+
+        before(:each) do
+          @board.accept_move('X', 0, 0)
+          @board.accept_move('X', 0, 1)
+          @board.accept_move('X', 0, 2)
+          @board.accept_move('X', 1, 0)
+          @board.accept_move('X', 1, 1)
+          @board.accept_move('X', 1, 2)
+          @board.accept_move('X', 2, 0)
+          @board.accept_move('X', 2, 1)
+          @board.accept_move('X', 2, 2)
+        end
+
+        it { should be_full }
+
+      end
+
+      context "board is empty" do
+        it { should_not be_full }
+      end
+
+      context "board has some empty spaces" do
+
+        before(:each) do
+          @board.accept_move('X', 0, 0)
+          @board.accept_move('X', 0, 1)
+          @board.accept_move('X', 0, 2)
+          @board.accept_move('X', 1, 0)
+          @board.accept_move('X', 1, 1)
+          @board.accept_move('X', 1, 2)
+          @board.accept_move('X', 2, 0)
+          @board.accept_move('X', 2, 1)
+        end
+
+        it { should_not be_full }
+
+      end
+
     end
 
     describe "#has_winner?" do

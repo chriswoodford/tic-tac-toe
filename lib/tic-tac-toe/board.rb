@@ -14,6 +14,11 @@ module TicTacToe
       @board[x][y] = char
     end
 
+    def full?
+      empty_spaces = @board.flatten.count { |c| c == " " }
+      true if empty_spaces == 0
+    end
+
     def print(output)
 
       @board.each_with_index do |row, index|
