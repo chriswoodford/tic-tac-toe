@@ -27,6 +27,10 @@ module TicTacToe
       true if empty_spaces == 0
     end
 
+    def tie?
+      true if winner == ["X", "O"]
+    end
+
     def has_winner?
 
       # horizontal line

@@ -34,6 +34,14 @@ module TicTacToe
       true if @board.full? || @board.has_winner?
     end
 
+    def winner
+      @board.winner if @board.has_winner?
+    end
+
+    def tie
+      @board.tie
+    end
+
   end
 
 end
