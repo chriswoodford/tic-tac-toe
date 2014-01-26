@@ -10,6 +10,10 @@ module TicTacToe
       ]
     end
 
+    def at(x, y)
+      @board[x][y]
+    end
+
     def flatten
       @board.flatten
     end
@@ -19,7 +23,11 @@ module TicTacToe
     end
 
     def accept_move(char, x, y)
-      @board[x][y] = char
+
+      if at(x, y) == " "
+        @board[x][y] = char
+      end
+
     end
 
     def full?

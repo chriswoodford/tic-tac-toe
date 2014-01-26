@@ -10,6 +10,20 @@ module TicTacToe
 
     subject { @board }
 
+    describe "#accept_move" do
+
+      context "a move already exists" do
+
+        it "does not update the board" do
+          @board.accept_move('X', 0, 0)
+          @board.accept_move('O', 0, 0)
+          expect(@board.at(0, 0)).to eq "X"
+        end
+
+      end
+
+    end
+
     describe "#full?" do
 
       context "board is full" do
