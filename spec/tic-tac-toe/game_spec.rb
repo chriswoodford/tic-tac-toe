@@ -4,13 +4,7 @@ module TicTacToe
 
   describe Game do
 
-    let(:empty_board) do
-      [
-        [" ", " ", " "],
-        [" ", " ", " "],
-        [" ", " ", " "]
-      ]
-    end
+    let(:empty_board) { Board.new }
 
     before(:each) do
       @output = double('output').as_null_object
@@ -21,8 +15,8 @@ module TicTacToe
 
       it "sets up an empty board" do
 
-        @game.start
-        expect(@game.board).to eq empty_board
+        @game.start(empty_board.dup)
+        expect(@game.board).to eql Board.new
 
       end
 
@@ -32,10 +26,10 @@ module TicTacToe
 
       it "makes a move" do
 
-        @game.start
+        @game.start(empty_board)
         @game.cpu_turn
 
-        expect(@game.board).to_not eq empty_board
+        expect(@game.board).to_not eql Board.new
 
       end
 
@@ -43,7 +37,7 @@ module TicTacToe
 
         expect(@output).to receive(:puts).with(/^CPU moves to/)
 
-        @game.start
+        @game.start(empty_board)
         @game.cpu_turn
 
       end
@@ -56,7 +50,7 @@ module TicTacToe
 
         expect(@output).to receive(:puts).with("Player make a move:")
 
-        @game.start
+        @game.start(empty_board)
         @game.player_turn
 
       end
@@ -67,13 +61,13 @@ module TicTacToe
 
       it "updates the game board" do
 
-        board = empty_board
-        board[1][1] = "O"
+        board = empty_board.dup
+        board.accept_move("O", 1, 1)
 
-        @game.start
+        @game.start(empty_board)
         @game.make_move("O", 1, 1)
 
-        expect(@game.board).to eq board
+        expect(@game.board).to eql board
 
       end
 

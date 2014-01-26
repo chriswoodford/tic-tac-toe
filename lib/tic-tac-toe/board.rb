@@ -10,6 +10,14 @@ module TicTacToe
       ]
     end
 
+    def flatten
+      @board.flatten
+    end
+
+    def eql?(other_board)
+      flatten == other_board.flatten
+    end
+
     def accept_move(char, x, y)
       @board[x][y] = char
     end

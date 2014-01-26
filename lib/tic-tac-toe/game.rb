@@ -2,6 +2,8 @@ module TicTacToe
 
   class Game
 
+    attr_accessor :board
+
     def initialize(output)
       @output = output
     end
@@ -11,7 +13,7 @@ module TicTacToe
     end
 
     def make_move(char, x, y)
-
+      @board.accept_move(char, x, y)
     end
 
     def print_board
