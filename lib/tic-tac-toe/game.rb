@@ -48,8 +48,8 @@ module TicTacToe
       @board.winner if @board.has_winner?
     end
 
-    def tie
-      @board.tie
+    def tie?
+      @board.tie?
     end
 
     def play(board)
@@ -75,6 +75,10 @@ module TicTacToe
         print_board
 
       end
+
+      puts "You win!" if winner == "O"
+      puts "You lose!" if winner == "X"
+      puts "It's a tie!" if tie?
 
     end
 
