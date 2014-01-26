@@ -42,6 +42,32 @@ module TicTacToe
       @board.tie
     end
 
+    def play(board)
+
+      start(board)
+      print_board
+
+      until over? do
+
+        cpu_turn
+        print_board
+
+        if over?
+          break
+        end
+
+        player_turn
+
+        player_input = gets
+        move = player_input.chomp!.split(',')
+
+        make_move('O', move[0].to_i, move[1].to_i)
+        print_board
+
+      end
+
+    end
+
   end
 
 end
