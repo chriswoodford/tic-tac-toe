@@ -53,6 +53,58 @@ module TicTacToe
 
     end
 
+    describe "#winner" do
+
+      subject { @board.winner }
+
+      context "there is no winner yet" do
+        it { should be_nil }
+      end
+
+      context "X is the winner" do
+
+        before(:each) do
+          @board.accept_move('X', 0, 0)
+          @board.accept_move('X', 0, 1)
+          @board.accept_move('X', 0, 2)
+        end
+
+        it { should eq "X" }
+
+      end
+
+      context "O is the winner" do
+
+        before(:each) do
+          @board.accept_move('O', 0, 0)
+          @board.accept_move('O', 1, 0)
+          @board.accept_move('O', 2, 0)
+        end
+
+        it { should eq "O" }
+
+      end
+
+      context "it is a tie" do
+
+        before(:each) do
+          @board.accept_move('O', 0, 0)
+          @board.accept_move('X', 0, 1)
+          @board.accept_move('O', 0, 2)
+          @board.accept_move('X', 1, 0)
+          @board.accept_move('O', 1, 1)
+          @board.accept_move('X', 1, 2)
+          @board.accept_move('X', 2, 0)
+          @board.accept_move('O', 2, 1)
+          @board.accept_move('X', 2, 2)
+        end
+
+        it { should eq ["X", "O"] }
+
+      end
+
+    end
+
     describe "#has_winner?" do
 
       context "three of the same character in a line" do

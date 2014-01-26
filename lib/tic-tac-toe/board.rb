@@ -30,19 +30,21 @@ module TicTacToe
     def has_winner?
 
       # horizontal line
-      return true if contains_winner? reduce_board(@board)
+      return true if contains_winner? horizontal_lines
 
       # vertical line
-      board_rotated_clockwise = @board.transpose.map(&:reverse)
-      return true if contains_winner? reduce_board(board_rotated_clockwise)
+      return true if contains_winner? vertical_lines
 
       # diagonal line
-      diagonal_lines = [
-        @board[0][0].to_s + @board[1][1].to_s + @board[2][2].to_s,
-        @board[0][2].to_s + @board[1][1].to_s + @board[2][0].to_s
-      ]
       true if contains_winner? diagonal_lines
 
+    end
+
+    def winner
+      all_lines = horizontal_lines + vertical_lines + diagonal_lines
+      return "X" if x_is_winner?(all_lines)
+      return "O" if o_is_winner?(all_lines)
+      return ["X", "O"] if full?
     end
 
     def print(output)
@@ -73,8 +75,32 @@ module TicTacToe
 
     protected
 
+      def horizontal_lines
+        reduce_board(@board)
+      end
+
+      def vertical_lines
+        board_rotated_clockwise = @board.transpose.map(&:reverse)
+        reduce_board(board_rotated_clockwise)
+      end
+
+      def diagonal_lines
+        [
+          @board[0][0].to_s + @board[1][1].to_s + @board[2][2].to_s,
+          @board[0][2].to_s + @board[1][1].to_s + @board[2][0].to_s
+        ]
+      end
+
+      def x_is_winner?(lines)
+        lines.include?("XXX")
+      end
+
+      def o_is_winner?(lines)
+        lines.include?("OOO")
+      end
+
       def contains_winner?(lines)
-        true if lines.include?("XXX") || lines.include?("OOO")
+        true if x_is_winner?(lines) || o_is_winner?(lines)
       end
 
       def reduce_board(board)
