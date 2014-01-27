@@ -4,20 +4,16 @@ module TicTacToe
 
     attr_accessor :board
 
-    def initialize(output)
-      @output = output
+    def initialize(presenter)
+      @presenter = presenter
     end
 
     def start(board)
       @board = board
     end
 
-    def make_move(char, x, y)
-      @board.accept_move(char, x, y)
-    end
-
     def print_board
-      @board.print(@output)
+      @presenter.print(@board)
     end
 
     def cpu_turn

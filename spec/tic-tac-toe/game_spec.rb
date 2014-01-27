@@ -7,7 +7,7 @@ module TicTacToe
     let(:empty_board) { Board.new }
 
     before(:each) do
-      @output = double('output').as_null_object
+      @presenter = double('presenter').as_null_object
       @game = Game.new(@output)
     end
 
@@ -57,22 +57,6 @@ module TicTacToe
 
     end
 
-    describe "#make_move" do
-
-      it "updates the game board" do
-
-        board = Board.new
-        board.accept_move("O", 1, 1)
-
-        @game.start(empty_board)
-        @game.make_move("O", 1, 1)
-
-        expect(@game.board).to eql board
-
-      end
-
-    end
-
     describe "#over?" do
 
       before(:each) do
@@ -86,9 +70,9 @@ module TicTacToe
         context "has a winner" do
 
           before(:each) do
-            @game.make_move('X', 0, 0)
-            @game.make_move('X', 1, 1)
-            @game.make_move('X', 2, 2)
+            @game.board.accept_move('X', 0, 0)
+            @game.board.accept_move('X', 1, 1)
+            @game.board.accept_move('X', 2, 2)
           end
 
           it { should be_over }
@@ -128,9 +112,9 @@ module TicTacToe
 
         it "is a single character" do
 
-          @game.make_move('X', 0, 0)
-          @game.make_move('X', 1, 1)
-          @game.make_move('X', 2, 2)
+          @game.board.accept_move('X', 0, 0)
+          @game.board.accept_move('X', 1, 1)
+          @game.board.accept_move('X', 2, 2)
 
           expect(@game.winner).to match(/^\w$/)
 
