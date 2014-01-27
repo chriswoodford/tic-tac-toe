@@ -55,10 +55,7 @@ module TicTacToe
         end
 
         print_board
-
-        if over?
-          break # might need to use throw here
-        end
+        break if over?
 
       end
 
