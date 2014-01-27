@@ -26,11 +26,12 @@ module TicTacToe
 
         it "prints the empty board" do
 
-          expect(@output).to receive(:puts).with("   |   |   ")
-          expect(@output).to receive(:puts).with("-----------")
-          expect(@output).to receive(:puts).with("   |   |   ")
-          expect(@output).to receive(:puts).with("-----------")
-          expect(@output).to receive(:puts).with("   |   |   ")
+          expect(@output).to receive(:puts).with("   1   2   3 ")
+          expect(@output).to receive(:puts).with("A    |   |   ")
+          expect(@output).to receive(:puts).with("  -----------")
+          expect(@output).to receive(:puts).with("B    |   |   ")
+          expect(@output).to receive(:puts).with("  -----------")
+          expect(@output).to receive(:puts).with("C    |   |   ")
 
           @presenter.print_board(@board)
 
@@ -38,11 +39,12 @@ module TicTacToe
 
         it "prints the winning board" do
 
-          expect(@output).to receive(:puts).with(" X | O | O ")
-          expect(@output).to receive(:puts).with("-----------")
-          expect(@output).to receive(:puts).with("   | X |   ")
-          expect(@output).to receive(:puts).with("-----------")
-          expect(@output).to receive(:puts).with("   |   | X ")
+          expect(@output).to receive(:puts).with("   1   2   3 ")
+          expect(@output).to receive(:puts).with("A  X | O | O ")
+          expect(@output).to receive(:puts).with("  -----------")
+          expect(@output).to receive(:puts).with("B    | X |   ")
+          expect(@output).to receive(:puts).with("  -----------")
+          expect(@output).to receive(:puts).with("C    |   | X ")
 
           @board.accept_move('X', 0, 0)
           @board.accept_move('O', 0, 1)
