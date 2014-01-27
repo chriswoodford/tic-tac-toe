@@ -9,50 +9,21 @@ module TicTacToe
     before(:each) do
       @presenter = double('presenter').as_null_object
       @game = Game.new(@output)
+      @players = [Player.new('X'), Player.new('O')]
     end
 
     describe "#start" do
 
+      before(:each) do
+        @game.start(empty_board.dup, @players)
+      end
+
       it "sets up an empty board" do
-
-        @game.start(empty_board.dup)
         expect(@game.board).to eql Board.new
-
       end
 
-    end
-
-    describe "#cpu_turn" do
-
-      it "makes a move" do
-
-        @game.start(empty_board)
-        @game.cpu_turn
-
-        expect(@game.board).to_not eql Board.new
-
-      end
-
-      it "describes the CPU's move" do
-
-        expect(@output).to receive(:puts).with(/^CPU moves to/)
-
-        @game.start(empty_board)
-        @game.cpu_turn
-
-      end
-
-    end
-
-    describe "#player_turn" do
-
-      it "prompts the Player to make a move" do
-
-        expect(@output).to receive(:puts).with("Player make a move:")
-
-        @game.start(empty_board)
-        @game.player_turn
-
+      it "adds the 2 players" do
+        expect(@game).to have(2).players
       end
 
     end
@@ -60,7 +31,7 @@ module TicTacToe
     describe "#over?" do
 
       before(:each) do
-        @game.start(empty_board)
+        @game.start(empty_board, @players)
       end
 
       subject { @game }
@@ -76,6 +47,7 @@ module TicTacToe
           end
 
           it { should be_over }
+
         end
 
         context "does not have a winner" do
@@ -99,7 +71,7 @@ module TicTacToe
     describe "#winner" do
 
       before(:each) do
-        @game.start(empty_board)
+        @game.start(empty_board, @players)
       end
 
       context "there is no winner yet" do

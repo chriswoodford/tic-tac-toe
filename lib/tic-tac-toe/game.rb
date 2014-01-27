@@ -2,14 +2,15 @@ module TicTacToe
 
   class Game
 
-    attr_accessor :board
+    attr_accessor :board, :players
 
     def initialize(presenter)
       @presenter = presenter
     end
 
-    def start(board)
+    def start(board, players)
       @board = board
+      @players = players
     end
 
     def print_board
