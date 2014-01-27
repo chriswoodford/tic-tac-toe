@@ -105,6 +105,9 @@ module TicTacToe
 
     end
 
+    describe "#declare_winner" do
+    end
+
   end
 
 end

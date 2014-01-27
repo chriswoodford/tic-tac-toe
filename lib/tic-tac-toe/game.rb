@@ -22,7 +22,11 @@ module TicTacToe
     end
 
     def winner
-      @board.winner if @board.has_winner?
+
+      if @board.has_winner?
+        @players.delete_if { |player| player.mark != @board.winner }.at(0)
+      end
+
     end
 
     def tie?
@@ -35,6 +39,16 @@ module TicTacToe
 
     def re_prompt(player)
       @presenter.puts player.re_prompt unless player.re_prompt == nil
+    end
+
+    def declare_winner
+
+      if tie?
+        @presenter.puts("It's a tie!") if tie?
+      else
+        @presenter.puts(winner.to_s + " wins!")
+      end
+
     end
 
     def play(brd, plrs)
@@ -59,9 +73,7 @@ module TicTacToe
 
       end
 
-      puts "You win!" if winner == "O"
-      puts "You lose!" if winner == "X"
-      puts "It's a tie!" if tie?
+      declare_winner
 
     end
 
