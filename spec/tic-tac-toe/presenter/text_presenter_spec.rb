@@ -12,7 +12,17 @@ module TicTacToe
         @presenter = TextPresenter.new(@output)
       end
 
-      describe "#print" do
+      describe "#puts" do
+
+        it "prints the supplied message" do
+          message = "This is a message"
+          expect(@output).to receive(:puts).with(message)
+          @presenter.puts message
+        end
+
+      end
+
+      describe "#print_board" do
 
         it "prints the empty board" do
 
@@ -22,7 +32,7 @@ module TicTacToe
           expect(@output).to receive(:puts).with("-----------")
           expect(@output).to receive(:puts).with("   |   |   ")
 
-          @presenter.print(@board)
+          @presenter.print_board(@board)
 
         end
 
@@ -40,7 +50,7 @@ module TicTacToe
           @board.accept_move('X', 1, 1)
           @board.accept_move('X', 2, 2)
 
-          @presenter.print(@board)
+          @presenter.print_board(@board)
 
         end
 

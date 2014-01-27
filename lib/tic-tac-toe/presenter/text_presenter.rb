@@ -8,7 +8,11 @@ module TicTacToe
         @output = output
       end
 
-      def print(board)
+      def puts(msg)
+        @output.puts(msg)
+      end
+
+      def print_board(board)
 
         board.to_a.each_with_index do |row, index|
 
