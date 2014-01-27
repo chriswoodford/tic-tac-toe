@@ -2,5 +2,12 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'tic-tac-toe'
 
-game = TicTacToe::Game.new(STDOUT)
-game.play(TicTacToe::Board.new)
+board = TicTacToe::Board.new
+players = [
+  TicTacToe::Cpu.new('X'),
+  TicTacToe::Player.new('O')
+]
+presenter = TicTacToe::Presenter::TextPresenter.new(STDOUT)
+
+game = TicTacToe::Game.new(presenter)
+game.play(board, players)

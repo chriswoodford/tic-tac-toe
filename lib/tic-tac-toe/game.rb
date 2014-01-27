@@ -14,27 +14,7 @@ module TicTacToe
     end
 
     def print_board
-      @presenter.print(@board)
-    end
-
-    def cpu_turn
-
-      while true
-        begin
-          x, y = rand(3), rand(3)
-          make_move("X", x, y)
-          break
-        rescue InvalidMoveError
-          # let the CPU try
-        end
-      end
-
-      @output.puts "CPU moves to [#{x}, #{y}]"
-
-    end
-
-    def player_turn
-      @output.puts "Player make a move:"
+      @presenter.print_board(@board)
     end
 
     def over?
@@ -49,37 +29,36 @@ module TicTacToe
       @board.tie?
     end
 
-    def play(board)
+    def prompt(player)
+      @presenter.puts player.prompt unless player.prompt == nil
+    end
 
-      start(board)
+    def re_prompt(player)
+      @presenter.puts player.re_prompt unless player.re_prompt == nil
+    end
+
+    def play(brd, plrs)
+
+      start(brd, plrs)
       print_board
 
-      until over? do
+      players.cycle(9) do |player|
 
-        cpu_turn
+        while true
+          begin
+            prompt player
+            @presenter.puts player.take_turn(board)
+            break
+          rescue InvalidMoveError
+            re_prompt player
+          end
+        end
+
         print_board
 
         if over?
-          break
+          break # might need to use throw here
         end
-
-        while true
-
-          player_turn
-
-          player_input = gets
-          move = player_input.chomp!.split(',')
-
-          begin
-            make_move('O', move[0].to_i, move[1].to_i)
-            break
-          rescue InvalidMoveError
-            puts "Please choose again"
-          end
-
-        end
-
-        print_board
 
       end
 
