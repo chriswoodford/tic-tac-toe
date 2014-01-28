@@ -100,10 +100,9 @@ module TicTacToe
       end
 
       def diagonal_lines
-        [
-          at('A', '1').to_s + at('B', '2').to_s + at('C', '3').to_s,
-          at('A', '3').to_s + at('B', '2').to_s + at('C', '1').to_s
-        ]
+        forward_slash = [at('A', '1'), at('B', '2'), at('C', '3')]
+        back_slash = [at('C', '1'), at('B', '2'), at('A', '3')]
+        [forward_slash, back_slash].map { |row| row.join.strip }
       end
 
       def x_is_winner?(lines)
