@@ -33,9 +33,13 @@ module TicTacToe
     protected
 
       def get_coords
-        player_input = gets
-        move = player_input.chomp!.split(',')
-        [move[0].to_i, move[1].to_i]
+        player_input = gets.chomp!
+        if player_input.include?(',')
+          move = player_input.split(',')
+        else
+          move = [player_input[0], player_input[1]]
+        end
+        [move[0].upcase, move[1]]
       end
 
   end
