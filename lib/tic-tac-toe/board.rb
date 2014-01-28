@@ -35,11 +35,11 @@ module TicTacToe
 
     def accept_move(char, row, col)
 
-      if at(row, col) == " "
-        set(row, col, char)
-      else
+      unless at(row, col) == " "
         raise InvalidMoveError.new
       end
+
+      set(row, col, char)
 
     end
 
