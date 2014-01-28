@@ -16,19 +16,20 @@ module TicTacToe
 
         it "does not update the board" do
 
-          @board.accept_move('X', 0, 0)
+          @board.accept_move('X', 'A', '1')
 
           begin
-            @board.accept_move('O', 0, 0)
+            @board.accept_move('O', 'A', '1')
           rescue InvalidMoveError
-            expect(@board.at(0, 0)).to eq "X"
+            expect(@board.at('A', '1')).to eq "X"
           end
 
         end
 
         it "causes an invalid move error" do
-          @board.accept_move('X', 0, 0)
-          expect { @board.accept_move('O', 0, 0) }.to raise_error(InvalidMoveError)
+          @board.accept_move('X', 'A', '1')
+          expect { @board.accept_move('O', 'A', '1') }.to
+            raise_error(InvalidMoveError)
         end
 
       end
@@ -55,7 +56,7 @@ module TicTacToe
 
         before(:each) do
           fill_board_with_all_x(@board)
-          @board.remove(2, 2)
+          @board.remove('C', '3')
         end
 
         it { should_not be_full }
@@ -75,9 +76,9 @@ module TicTacToe
       context "X is the winner" do
 
         before(:each) do
-          @board.accept_move('X', 0, 0)
-          @board.accept_move('X', 0, 1)
-          @board.accept_move('X', 0, 2)
+          @board.accept_move('X', 'A', '1')
+          @board.accept_move('X', 'A', '2')
+          @board.accept_move('X', 'A', '3')
         end
 
         it { should eq "X" }
@@ -87,9 +88,9 @@ module TicTacToe
       context "O is the winner" do
 
         before(:each) do
-          @board.accept_move('O', 0, 0)
-          @board.accept_move('O', 1, 0)
-          @board.accept_move('O', 2, 0)
+          @board.accept_move('O', 'A', '1')
+          @board.accept_move('O', 'B', '1')
+          @board.accept_move('O', 'C', '1')
         end
 
         it { should eq "O" }
@@ -115,11 +116,11 @@ module TicTacToe
         context "horizontal line" do
 
           before(:each) do
-            @board.accept_move('X', 0, 0)
-            @board.accept_move('O', 1, 1)
-            @board.accept_move('X', 0, 1)
-            @board.accept_move('O', 2, 2)
-            @board.accept_move('X', 0, 2)
+            @board.accept_move('X', 'A', '1')
+            @board.accept_move('O', 'B', '2')
+            @board.accept_move('X', 'A', '2')
+            @board.accept_move('O', 'C', '2')
+            @board.accept_move('X', 'A', '3')
           end
 
           it { should have_winner }
@@ -129,11 +130,11 @@ module TicTacToe
         context "vertical line" do
 
           before(:each) do
-            @board.accept_move('X', 0, 0)
-            @board.accept_move('O', 1, 1)
-            @board.accept_move('X', 1, 0)
-            @board.accept_move('O', 2, 2)
-            @board.accept_move('X', 2, 0)
+            @board.accept_move('X', 'A', '1')
+            @board.accept_move('O', 'B', '2')
+            @board.accept_move('X', 'B', '1')
+            @board.accept_move('O', 'C', '3')
+            @board.accept_move('X', 'C', '1')
           end
 
           it { should have_winner }
@@ -143,11 +144,11 @@ module TicTacToe
         context "diagonal line" do
 
           before(:each) do
-            @board.accept_move('X', 1, 1)
-            @board.accept_move('O', 0, 0)
-            @board.accept_move('X', 2, 0)
-            @board.accept_move('O', 2, 2)
-            @board.accept_move('X', 0, 2)
+            @board.accept_move('X', 'B', '2')
+            @board.accept_move('O', 'A', '1')
+            @board.accept_move('X', 'C', '1')
+            @board.accept_move('O', 'C', '3')
+            @board.accept_move('X', 'A', '3')
           end
 
           it { should have_winner }
