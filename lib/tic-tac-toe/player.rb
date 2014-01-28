@@ -55,7 +55,7 @@ module TicTacToe
     protected
 
       def get_coords
-        [rand(3), rand(3)]
+        [Board::ROW_HEADERS[rand(3)], Board::COLUMN_HEADERS[rand(3)]]
       end
 
   end
