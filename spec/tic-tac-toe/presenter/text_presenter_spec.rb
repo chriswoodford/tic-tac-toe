@@ -53,11 +53,11 @@ module TicTacToe
           expect(@output).to receive(:puts).with("  -----------")
           expect(@output).to receive(:puts).with("#{@c}    |   | X ")
 
-          @board.accept_move('X', 0, 0)
-          @board.accept_move('O', 0, 1)
-          @board.accept_move('O', 0, 2)
-          @board.accept_move('X', 1, 1)
-          @board.accept_move('X', 2, 2)
+          @board.accept_move('X', 'A', '1')
+          @board.accept_move('O', 'A', '2')
+          @board.accept_move('O', 'A', '3')
+          @board.accept_move('X', 'B', '2')
+          @board.accept_move('X', 'C', '3')
 
           @presenter.print_board(@board)
 
