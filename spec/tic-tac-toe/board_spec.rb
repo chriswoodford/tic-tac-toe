@@ -28,7 +28,7 @@ module TicTacToe
 
         it "causes an invalid move error" do
           @board.accept_move('X', 'A', '1')
-          expect { @board.accept_move('O', 'A', '1') }.to
+          expect { @board.accept_move('O', 'A', '1') }.to \
             raise_error(InvalidMoveError)
         end
 

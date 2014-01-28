@@ -17,12 +17,12 @@ module TicTacToe
       @board
     end
 
-    def at(x, y)
-      @board[x][y]
+    def at(row, col)
+      @board[x(row)][y(col)]
     end
 
-    def remove(x, y)
-      @board[x][y] = " "
+    def remove(row, col)
+      set(row, col, " ")
     end
 
     def flatten
@@ -33,10 +33,10 @@ module TicTacToe
       flatten == other_board.flatten
     end
 
-    def accept_move(char, x, y)
+    def accept_move(char, row, col)
 
-      if at(x, y) == " "
-        @board[x][y] = char
+      if at(row, col) == " "
+        set(row, col, char)
       else
         raise InvalidMoveError.new
       end
@@ -78,6 +78,18 @@ module TicTacToe
 
     protected
 
+      def x(row)
+        ROW_HEADERS.index(row)
+      end
+
+      def y(col)
+        COLUMN_HEADERS.index(col)
+      end
+
+      def set(row, col, char)
+        @board[x(row)][y(col)] = char
+      end
+
       def horizontal_lines
         reduce_board(@board)
       end
@@ -89,8 +101,8 @@ module TicTacToe
 
       def diagonal_lines
         [
-          at(0, 0).to_s + at(1, 1).to_s + at(2, 2).to_s,
-          at(0, 2).to_s + at(1, 1).to_s + at(2, 0).to_s
+          at('A', '1').to_s + at('A', '2').to_s + at('A', '3').to_s,
+          at('A', '3').to_s + at('B', '2').to_s + at('C', '1').to_s
         ]
       end
 
