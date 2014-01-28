@@ -25,6 +25,8 @@ module TicTacToe
 
       if @board.has_winner?
         @players.delete_if { |player| player.mark != @board.winner }.at(0)
+      elsif tie?
+        @players
       end
 
     end

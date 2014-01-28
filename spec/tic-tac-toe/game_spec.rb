@@ -82,13 +82,14 @@ module TicTacToe
 
       context "there is a winner" do
 
-        it "is a single character" do
+        it "is the winning player" do
 
           @game.board.accept_move('X', 'A', '1')
           @game.board.accept_move('X', 'B', '2')
           @game.board.accept_move('X', 'C', '3')
 
-          expect(@game.winner).to match(/^\w$/)
+          expect(@game.winner).to be_a Player
+          expect(@game.winner.mark).to eq "X"
 
         end
 
@@ -96,9 +97,9 @@ module TicTacToe
 
       context "there is a tie" do
 
-        it "is an array with two elements" do
-          #fill_board_with_no_winner(@game.board)
-          #expect(@game.winner).to have(2).items
+        it "is an array with both players" do
+          fill_board_with_no_winner(@game.board)
+          expect(@game.winner).to have(2).players
         end
 
       end

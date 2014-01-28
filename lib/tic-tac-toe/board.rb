@@ -101,7 +101,7 @@ module TicTacToe
 
       def diagonal_lines
         [
-          at('A', '1').to_s + at('A', '2').to_s + at('A', '3').to_s,
+          at('A', '1').to_s + at('B', '2').to_s + at('C', '3').to_s,
           at('A', '3').to_s + at('B', '2').to_s + at('C', '1').to_s
         ]
       end
