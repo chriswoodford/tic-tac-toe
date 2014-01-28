@@ -12,8 +12,8 @@ module TicTacToe
     describe "#make_move" do
 
       it "updates the game board" do
-        expect(@board).to receive(:accept_move).with(@player.mark, 1, 1)
-        @player.make_move(@board, 1, 1)
+        expect(@board).to receive(:accept_move).with(@player.mark, "B", "2")
+        @player.make_move(@board, "B", "2")
       end
 
     end
@@ -21,16 +21,16 @@ module TicTacToe
     describe "#take_turn" do
 
       before(:each) do
-        @player.stub(:get_coords).and_return([1, 2])
+        @player.stub(:get_coords).and_return(["B", "3"])
       end
 
       it "makes a move" do
-        expect(@player).to receive(:make_move).with(@board, 1, 2)
+        expect(@player).to receive(:make_move).with(@board, "B", "3")
         @player.take_turn(@board)
       end
 
       it "returns the move made" do
-        expect(@player.take_turn(@board)).to eq "Player moved to 1, 2"
+        expect(@player.take_turn(@board)).to eq "Player moved to B, 3"
       end
 
     end
