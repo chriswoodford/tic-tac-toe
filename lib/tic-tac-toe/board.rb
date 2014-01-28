@@ -2,6 +2,9 @@ module TicTacToe
 
   class Board
 
+    ROW_HEADERS = ["A", "B", "C"]
+    COLUMN_HEADERS = ["1", "2", "3"]
+
     def initialize
       @board = [
         [" ", " ", " "],

@@ -24,14 +24,21 @@ module TicTacToe
 
       describe "#print_board" do
 
+        before(:each) do
+          @a = Board::ROW_HEADERS[0]
+          @b = Board::ROW_HEADERS[1]
+          @c = Board::ROW_HEADERS[2]
+          @col_header = "   " + Board::COLUMN_HEADERS.join("   ") + " "
+        end
+
         it "prints the empty board" do
 
-          expect(@output).to receive(:puts).with("   1   2   3 ")
-          expect(@output).to receive(:puts).with("A    |   |   ")
+          expect(@output).to receive(:puts).with(@col_header)
+          expect(@output).to receive(:puts).with("#{@a}    |   |   ")
           expect(@output).to receive(:puts).with("  -----------")
-          expect(@output).to receive(:puts).with("B    |   |   ")
+          expect(@output).to receive(:puts).with("#{@b}    |   |   ")
           expect(@output).to receive(:puts).with("  -----------")
-          expect(@output).to receive(:puts).with("C    |   |   ")
+          expect(@output).to receive(:puts).with("#{@c}    |   |   ")
 
           @presenter.print_board(@board)
 
@@ -39,12 +46,12 @@ module TicTacToe
 
         it "prints the winning board" do
 
-          expect(@output).to receive(:puts).with("   1   2   3 ")
-          expect(@output).to receive(:puts).with("A  X | O | O ")
+          expect(@output).to receive(:puts).with(@col_header)
+          expect(@output).to receive(:puts).with("#{@a}  X | O | O ")
           expect(@output).to receive(:puts).with("  -----------")
-          expect(@output).to receive(:puts).with("B    | X |   ")
+          expect(@output).to receive(:puts).with("#{@b}    | X |   ")
           expect(@output).to receive(:puts).with("  -----------")
-          expect(@output).to receive(:puts).with("C    |   | X ")
+          expect(@output).to receive(:puts).with("#{@c}    |   | X ")
 
           @board.accept_move('X', 0, 0)
           @board.accept_move('O', 0, 1)
