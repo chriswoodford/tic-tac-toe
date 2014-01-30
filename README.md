@@ -23,6 +23,8 @@ would like your 'O' to go.
 e.g. `Player make a move:`  
 Just enter `B,2`  
 
+At any point you can end the game by typing exit, quit, or bye  
+
 ## Developing
 
 ### Dependencies
