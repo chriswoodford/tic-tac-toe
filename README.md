@@ -29,9 +29,9 @@ At any point you can end the game by typing exit, quit, or bye
 
 ### Dependencies
 
-rspec (2.14)
-rake
-coveralls
+rspec (2.14)  
+rake  
+coveralls  
 
 ### Running the Test Suite
 
