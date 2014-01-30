@@ -9,5 +9,13 @@ players = [
 ]
 presenter = TicTacToe::Presenter::TextPresenter.new(STDOUT)
 
-game = TicTacToe::Game.new(presenter)
-game.play(board, players)
+trap("SIGINT") { throw :ctrl_c }
+
+catch :ctrl_c do
+  begin
+    game = TicTacToe::Game.new(presenter)
+    game.play(board, players)
+  rescue Exception
+    puts "Not printed"
+  end
+end
