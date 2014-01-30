@@ -34,7 +34,9 @@ module TicTacToe
 
       def get_coords
         player_input = gets.chomp!
-        if player_input.include?(',')
+        if ["exit", "quit", "bye"].include?(player_input)
+          exit!
+        elsif player_input.include?(',')
           move = player_input.split(',')
         else
           move = [player_input[0], player_input[1]]

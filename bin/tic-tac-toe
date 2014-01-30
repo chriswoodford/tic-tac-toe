@@ -16,6 +16,5 @@ catch :ctrl_c do
     game = TicTacToe::Game.new(presenter)
     game.play(board, players)
   rescue Exception
-    puts "Not printed"
   end
 end
